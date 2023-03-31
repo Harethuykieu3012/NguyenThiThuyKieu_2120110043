@@ -12,7 +12,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+       echo "Thuong hieu";
     }
 
     /**
