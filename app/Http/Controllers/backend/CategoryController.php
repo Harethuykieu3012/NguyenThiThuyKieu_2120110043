@@ -4,15 +4,15 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // GET admin/cayegory, admin/category/index
     public function index()
     {
-        //
+        $list_category = Category::get();
+        return view('backend.category.index',compact('list_category'));
     }
 
     /**
@@ -20,7 +20,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+       echo('đã thêm');
     }
 
     /**
