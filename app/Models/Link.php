@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Link extends Model
 {
     use HasFactory;
-    protected $table='nttk_category';
-    
+    protected $table = 'nttk_link';
+    public $timestamps = false;
+
 }
