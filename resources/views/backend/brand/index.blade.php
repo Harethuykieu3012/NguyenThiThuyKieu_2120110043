@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Tất cả danh mục sản phẩm')
+@section('title', 'Tất cả thương hiệu sản phẩm')
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -7,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>TẤT CẢ DANH MỤC</h1>
+                        <h1>TẤT CẢ THƯƠNG HIỆU</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item active">Tất cả danh mục</li>
+                            <li class="breadcrumb-item active">Tất cả thương hiệu</li>
                         </ol>
                     </div>
                 </div>
@@ -31,10 +31,10 @@
                                 <i class=" fal  fa-file-times"></i> Xóa</button>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a href="{{ route('category.create') }}" class=" btn btn-sm btn-success">
+                            <a href="{{ route('brand.create') }}" class=" btn btn-sm btn-success">
                                 <i class="fas fa-plus"></i>Thêm
                             </a>
-                            <a href="{{ route('category.trash')}}" class=" btn btn-sm btn-danger">
+                            <a href="{{ route('brand.trash') }}" class=" btn btn-sm btn-danger">
                                 <i class="fas fa-trash"></i>Thùng rác
                             </a>
                         </div>
@@ -55,43 +55,44 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($list_category as $category)
+                            @foreach ($list_brand as $brand)
                                 <tr>
 
                                     <td class="text-center">
                                         <input type="checkbox">
                                     </td>
-                                    <td> <img class="img-fluid" src="{{asset('images/category/'.$category->image)}}" 
-                                        alt="{{$category->image}}">
-                                     </td>
-                                    <td> {{ $category->name }} </td>
-                                    <td>{{ $category->slug }}</td>
-                                    <td class="text-center">{{ $category->created_at }}</td>
+                                    <td> <img class="img-fluid" src="{{ asset('images/brand/' . $brand->image) }}"
+                                            alt="{{ $brand->image }}">
+                                    </td>
+
+                                    <td> {{ $brand->name }} </td>
+                                    <td>{{ $brand->slug }}</td>
+                                    <td class="text-center">{{ $brand->created_at }}</td>
                                     <td class="text-center">
-                                        @if ($category->status == 1)
-                                            <a href="{{ route('category.status', ['category' => $category->id]) }}"
+                                        @if ($brand->status == 1)
+                                            <a href="{{ route('brand.status',['brand'=>$brand->id]) }}"
                                                 class="btn btn -sm btn-success">
                                                 <i class="fas fa-toggle-on"></i>
                                             </a>
                                         @else
-                                            <a href="{{ route('category.status', ['category' => $category->id]) }}"
+                                            <a href="{{ route('brand.status', ['brand' => $brand->id]) }}"
                                                 class="btn btn -sm btn-danger">
                                                 <i class="fas fa-toggle-off"></i>
                                             </a>
                                         @endif
-                                        <a href="{{ route('category.edit', ['category' => $category->id]) }}"
+                                        <a href="{{ route('brand.edit', ['brand' => $brand->id]) }}"
                                             class="btn btn -sm btn-info">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="{{ route('category.show', ['category' => $category->id]) }}"
+                                        <a href="{{ route('brand.show', ['brand' => $brand->id]) }}"
                                             class="btn btn -sm btn-success">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="{{ route('category.delete', ['category' => $category->id]) }}"
+                                        <a href="{{ route('brand.delete', ['brand' => $brand->id]) }}"
                                             class="btn btn -sm btn-danger">
                                             <i class="fas fa-trash"></i></a>
                                     </td>
-                                    <td>{{ $category->id }}</td>
+                                    <td>{{ $brand->id }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

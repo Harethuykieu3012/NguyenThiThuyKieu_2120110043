@@ -31,11 +31,8 @@
                                 <i class=" fal  fa-file-times"></i> Xóa</button>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a href="{{ route('category.create') }}" class=" btn btn-sm btn-success">
-                                <i class="fas fa-plus"></i>Thêm
-                            </a>
-                            <a href="{{ route('category.trash')}}" class=" btn btn-sm btn-danger">
-                                <i class="fas fa-trash"></i>Thùng rác
+                            <a href="{{ route('category.index') }}" class=" btn btn-sm btn-info">
+                                <i class="fas fa-long-arrow-alt-left"></i>Quay về danh sách
                             </a>
                         </div>
                     </div>
@@ -46,7 +43,7 @@
                         <thead>
                             <tr>
                                 <th style="width:20px;" class="text-center">#</th>
-                                <th style="width:90px;" class="text-center">Hình</th>
+                                <th style="width:90px;" class="text-center">Hình đại diện</th>
                                 <th>Tên danh mục </th>
                                 <th>Slug</th>
                                 <th>Ngày đăng</th>
@@ -61,35 +58,20 @@
                                     <td class="text-center">
                                         <input type="checkbox">
                                     </td>
-                                    <td> <img class="img-fluid" src="{{asset('images/category/'.$category->image)}}" 
-                                        alt="{{$category->image}}">
-                                     </td>
+                                    <td> <img class="img-fluid" src="{{ asset ('images/category/' . $category->image) }}" alt="{{$category->image}}"> </td>
                                     <td> {{ $category->name }} </td>
                                     <td>{{ $category->slug }}</td>
                                     <td class="text-center">{{ $category->created_at }}</td>
                                     <td class="text-center">
-                                        @if ($category->status == 1)
-                                            <a href="{{ route('category.status', ['category' => $category->id]) }}"
-                                                class="btn btn -sm btn-success">
-                                                <i class="fas fa-toggle-on"></i>
-                                            </a>
-                                        @else
-                                            <a href="{{ route('category.status', ['category' => $category->id]) }}"
-                                                class="btn btn -sm btn-danger">
-                                                <i class="fas fa-toggle-off"></i>
-                                            </a>
-                                        @endif
-                                        <a href="{{ route('category.edit', ['category' => $category->id]) }}"
-                                            class="btn btn -sm btn-info">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="{{ route('category.show', ['category' => $category->id]) }}"
+
+
+                                        <a href="{{ route('category.restore', ['category' => $category->id]) }}"
                                             class="btn btn -sm btn-success">
-                                            <i class="fas fa-eye"></i>
+                                            <i class="fas fa-undo"></i>
                                         </a>
-                                        <a href="{{ route('category.delete', ['category' => $category->id]) }}"
+                                        <a href="{{ route('category.destroy', ['category' => $category->id]) }}"
                                             class="btn btn -sm btn-danger">
-                                            <i class="fas fa-trash"></i></a>
+                                            <i class="fas fa-trash-alt"></i></a>
                                     </td>
                                     <td>{{ $category->id }}</td>
                                 </tr>

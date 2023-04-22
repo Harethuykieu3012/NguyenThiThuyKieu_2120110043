@@ -1,7 +1,7 @@
 @extends('layouts.admin')
-@section('title', 'Thêm mục sản phẩm')
+@section('title', 'Thêm chủ đề')
 @section('content')
-    <form action="{{ route('category.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('topic.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -9,13 +9,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>THÊM DANH MỤC</h1>
+                            <h1>THÊM CHỦ ĐỀ</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Bảng điều khiển</a>
                                 </li>
-                                <li class="breadcrumb-item active">Thêm danh mục</li>
+                                <li class="breadcrumb-item active">Thêm chủ đề</li>
                             </ol>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                                 <button type="submit" class=" btn btn-sm btn-success">
                                     <i class="fas fa-save"></i> Lưu[Thêm]
                                 </button>
-                                <a href="{{ route('category.index') }}" class=" btn btn-sm btn-info">
+                                <a href="{{ route('topic.index') }}" class=" btn btn-sm btn-info">
                                     <i class="fas fa-long-arrow-alt-left"></i>Quay về danh sách
                                 </a>
                             </div>
@@ -47,12 +47,12 @@
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="mb-3">
-                                    <label for="name">Tên danh mục</label>
-                                    <input type="text" name="name" value=" {{ old('name') }}" id="name"
-                                        class="form-control" placeholder="Nhập tên danh mục">
-                                    @if ($errors->has('name'))
+                                    <label for="title">Tên chủ đề</label>
+                                    <input type="text" name="title" value=" {{ old('title') }}" id="title"
+                                        class="form-control" placeholder="Nhập tên chủ đề">
+                                    @if ($errors->has('title'))
                                         <div class="text-danger">
-                                            {{ $errors->first('name') }}
+                                            {{ $errors->first('title') }}
                                         </div>
                                     @endif
                                 </div>

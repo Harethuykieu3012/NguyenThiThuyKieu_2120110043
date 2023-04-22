@@ -1,7 +1,7 @@
 @extends('layouts.admin')
-@section('title', 'Thêm mục sản phẩm')
+@section('title', 'Thêm thương hiệu sản phẩm')
 @section('content')
-    <form action="{{ route('category.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('brand.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -9,13 +9,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>THÊM DANH MỤC</h1>
+                            <h1>THÊM THƯƠNG HIỆU</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Bảng điều khiển</a>
                                 </li>
-                                <li class="breadcrumb-item active">Thêm danh mục</li>
+                                <li class="breadcrumb-item active">Thêm thương hiệu</li>
                             </ol>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                                 <button type="submit" class=" btn btn-sm btn-success">
                                     <i class="fas fa-save"></i> Lưu[Thêm]
                                 </button>
-                                <a href="{{ route('category.index') }}" class=" btn btn-sm btn-info">
+                                <a href="{{ route('brand.index') }}" class=" btn btn-sm btn-info">
                                     <i class="fas fa-long-arrow-alt-left"></i>Quay về danh sách
                                 </a>
                             </div>
@@ -77,13 +77,6 @@
 
                             </div>
                             <div class="col-md-3">
-                                <div class="mb-3">
-                                    <label for="parent_id">Danh mục cha</label>
-                                    <select class="form-control" id="parent_id" name="parent_id">
-                                        <option value="0">--Cấp cha--</option>
-                                        {!! $html_parent_id !!}
-                                    </select>
-                                </div>
                                 <div class="mb-3">
                                     <label for="sort_order">Vị trí sắp xếp</label>
                                     <select class="form-control" id="sort_order" name="sort_order">

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
-@section('title', 'Thêm mục sản phẩm')
+@section('title', 'Thêm bài viết')
 @section('content')
-    <form action="{{ route('category.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -9,13 +9,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>THÊM DANH MỤC</h1>
+                            <h1>Thêm bài viết</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Bảng điều khiển</a>
                                 </li>
-                                <li class="breadcrumb-item active">Thêm danh mục</li>
+                                <li class="breadcrumb-item active">Thêm bài viết</li>
                             </ol>
                         </div>
                     </div>
@@ -33,32 +33,33 @@
 
                             </div>
                             <div class="col-md-6 text-right">
-                                <button type="submit" class=" btn btn-sm btn-success">
+                                <button type="submit" class="btn btn-sm btn-success">
                                     <i class="fas fa-save"></i> Lưu[Thêm]
                                 </button>
-                                <a href="{{ route('category.index') }}" class=" btn btn-sm btn-info">
-                                    <i class="fas fa-long-arrow-alt-left"></i>Quay về danh sách
+                                <a href="{{ route('post.index') }}"class="btn btn-sm btn-info">
+                                    <i class="fas fa-trash"></i> Quay lại danh sách
                                 </a>
                             </div>
                         </div>
                     </div>
+
                     <div class="card-body">
                         @includeIf('backend.message_alert')
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="mb-3">
-                                    <label for="name">Tên danh mục</label>
-                                    <input type="text" name="name" value=" {{ old('name') }}" id="name"
-                                        class="form-control" placeholder="Nhập tên danh mục">
-                                    @if ($errors->has('name'))
+                                    <label for="title">Tên bài viết</label>
+                                    <input type="text" name="title" value="{{ old('title') }}" id="title"
+                                        class="form-control" placeholder="Nhập tên bài viết">
+                                    @if ($errors->has('title'))
                                         <div class="text-danger">
-                                            {{ $errors->first('name') }}
+                                            {{ $errors->first('title') }}
                                         </div>
                                     @endif
                                 </div>
                                 <div class="mb-3">
                                     <label for="metakey">Từ khóa</label>
-                                    <textarea name="metakey" id="metakey" class="form-control" placeholder="Từ khóa tìm kiếm"> {{ old('metakey') }}</textarea>
+                                    <textarea name="metakey" id="metakey" class="form-control" placeholder="Từ khóa tìm kiếm">{{ old('metakey') }}</textarea>
                                     @if ($errors->has('metakey'))
                                         <div class="text-danger">
                                             {{ $errors->first('metakey') }}
@@ -67,40 +68,49 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="metadesc">Mô tả</label>
-                                    <textarea name="metadesc" id="metadesc" class="form-control" placeholder="Nhập mô tả"> {{ old('metadesc') }}</textarea>
+                                    <textarea name="metadesc" id="metadesc" class="form-control" placeholder="Nhập mô tả">{{ old('metadesc') }}</textarea>
                                     @if ($errors->has('metadesc'))
                                         <div class="text-danger">
                                             {{ $errors->first('metadesc') }}
                                         </div>
                                     @endif
                                 </div>
-
+                                <div class="mb-3">
+                                    <label for="detail">Chi tiết</label>
+                                    <textarea name="detail" id="detail" class="form-control" placeholder="Chi tiết">{{ old('detail') }}</textarea>
+                                    @if ($errors->has('detail'))
+                                        <div class="text-danger">
+                                            {{ $errors->first('detail') }}
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
+
                             <div class="col-md-3">
                                 <div class="mb-3">
-                                    <label for="parent_id">Danh mục cha</label>
-                                    <select class="form-control" id="parent_id" name="parent_id">
-                                        <option value="0">--Cấp cha--</option>
-                                        {!! $html_parent_id !!}
+                                    <label for="topic_id">Chủ đề bài viết</label>
+                                    <select class="form-control" name="topic_id" id="topic_id">
+                                        <option value="0">-- Cấp cha --</option>
+                                        {!! $html_topic_id !!}
                                     </select>
                                 </div>
-                                <div class="mb-3">
+                                {{-- <div class="mb-3">
                                     <label for="sort_order">Vị trí sắp xếp</label>
-                                    <select class="form-control" id="sort_order" name="sort_order">
-                                        <option value="0">--Vị trí sắp xếp--</option>
+                                    <select class="form-control" name="sort_order" id="sort_order">
+                                        <option value="0">-- Vị trí --</option>
                                         {!! $html_sort_order !!}
                                     </select>
-                                </div>
+                                </div> --}}
                                 <div class="mb-3">
-                                    <label for="image">Hình đại diện</label>
-                                    <input type="file" name="image" value=" {{ old('image') }}" id="image"
-                                        class="form-control" placeholder="Nhập tên danh mục">
+                                    <label for="image">Hình ảnh</label>
+                                    <input type="file" name="image" value="{{ old('image') }}" id="image"
+                                        class="form-control">
                                 </div>
                                 <div class="mb-3">
                                     <label for="status">Trạng thái</label>
-                                    <select class="form-control" id="status" name="status">
-                                        <option value="1">--Xuất bản --</option>
-                                        <option value="2">--Chưa xuất bản--</option>
+                                    <select class="form-control" name="status" id="status">
+                                        <option value="1">Xuất bản</option>
+                                        <option value="0">Chưa xuất bản</option>
                                     </select>
                                 </div>
                             </div>
@@ -117,6 +127,5 @@
             </section>
             <!-- /.content -->
         </div>
-
     </form>
 @endsection
