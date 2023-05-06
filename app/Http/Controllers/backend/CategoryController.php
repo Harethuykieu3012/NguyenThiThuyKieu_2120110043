@@ -105,8 +105,16 @@ class CategoryController extends Controller
         $html_parent_id = '';
         $html_sort_order = '';
         foreach ($list_category as $item) {
-            $html_parent_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
-            $html_sort_order .= '<option value="' . $item->sort_order . '">Sau:' . $item->name . '</option>';
+            if ($category->parent_id == $item->id) {
+                $html_parent_id .= '<option selected value="' . $item->id . '">' . $item->name . '</option>';
+            } else {
+                $html_parent_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
+            }
+            if ($category->sort_order == $item->id) {
+                $html_sort_order .= '<option selected value="' . $item->sort_order - 1 . '">Sau: ' . $item->name . '</option>';
+            } else {
+                $html_sort_order .= '<option value="' . $item->sort_order . '">Sau: ' . $item->name . '</option>';
+            }
         }
         return view('backend.category.edit', compact('category', 'html_parent_id', 'html_sort_order'));
     }
@@ -142,7 +150,7 @@ class CategoryController extends Controller
         //end upload file
         if ($category->save()) {
             $link = Link::where([['type', '=', 'category'], ['table_id', '=', $id]])->first();
-            //  $link->slug = $category->slug;
+            $link->slug = $category->slug;
             $link->save();
             return redirect()->route('category.index')->with('message', ['type' => 'success', 'msg' => 'Sửa mẫu tin thành công !']);
         } else

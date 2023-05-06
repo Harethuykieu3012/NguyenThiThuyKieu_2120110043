@@ -14,7 +14,7 @@ class TopicUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2',
+            'title' => 'required|min:2',
             'metakey' => 'required',
             'metadesc' => 'required'
         ];
@@ -22,8 +22,8 @@ class TopicUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Bạn chưa nhập tên',
-            'name.min' => 'Tên ít nhất 2 kí tự',
+            'title.required' => 'Bạn chưa nhập tên',
+            'title.min' => 'Tên ít nhất 2 kí tự',
             'metakey.required' => 'Bạn chưa nhập từ khóa tìm kiếm',
             'metadesc' => 'Bạn chưa nhập mô tae'
         ];

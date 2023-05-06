@@ -55,7 +55,7 @@ class TopicController extends Controller
         $topic->sort_order = $request->sort_order;
         $topic->status = $request->status;
         $topic->created_at = date('Y-m-d H:i:s');
-        $topic->create_by = 1;
+        $topic->created_by = 1;
         //Upload file
         if ($request->has('image')) {
             $path_dir = "images/topic"; // nơi lưu trữ
@@ -70,7 +70,7 @@ class TopicController extends Controller
         if ($topic->save()) {
             $link = new Link();
             $link->slug = $topic->slug;
-            $link->tableid = $topic->id;
+            $link->table_id = $topic->id;
             $link->type = 'topic';
             $link->save();
             return redirect()->route('topic.index')->with('message', ['type' => 'success', 'msg' => 'Thêm mẫu tin thành công !']);
@@ -102,8 +102,12 @@ class TopicController extends Controller
         $html_parent_id = '';
         $html_sort_order = '';
         foreach ($list_topic as $item) {
-            $html_parent_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
-            $html_sort_order .= '<option value="' . $item->sort_order . '">Sau:' . $item->name . '</option>';
+            if ($topic->parent_id == $item->id) {
+                $html_parent_id .= '<option selected value="' . $item->id . '">' . $item->name . '</option>';
+            } else {
+                $html_parent_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
+            }
+            $html_sort_order .= '<option value="' . $item->sort_order . '">Sau: ' . $item->name . '</option>';
         }
         return view('backend.topic.edit', compact('topic', 'html_parent_id', 'html_sort_order'));
     }
