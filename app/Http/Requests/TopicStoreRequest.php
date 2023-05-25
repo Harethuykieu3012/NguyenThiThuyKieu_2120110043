@@ -16,7 +16,10 @@ class TopicStoreRequest extends FormRequest
         return [
             'title' => 'required|min:2',
             'metakey' => 'required',
-            'metadesc' => 'required'
+            'metadesc' => 'required',
+            'image' => 'required',
+
+
         ];
     }
     public function messages()
@@ -25,7 +28,8 @@ class TopicStoreRequest extends FormRequest
             'title.required' => 'Bạn chưa nhập tên',
             'title.min' => 'Tên ít nhất 2 kí tự',
             'metakey.required' => 'Bạn chưa nhập từ khóa tìm kiếm',
-            'metadesc' => 'Bạn chưa nhập mô tả'
+            'metadesc' => 'Bạn chưa nhập mô tả',
+            'image' => 'Bạn chưa chọn hình',
         ];
     }
 }

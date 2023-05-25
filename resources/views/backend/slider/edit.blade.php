@@ -1,7 +1,8 @@
 @extends('layouts.admin')
-@section('title', 'Thêm trang đơn')
+@section('title', 'Cập nhật slider')
 @section('content')
-    <form action="{{ route('page.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('slider.update', ['slider' => $slider->id]) }}" method="post" enctype="multipart/form-data">
+        @method('PUT')
         @csrf
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -9,13 +10,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>THÊM DANH MỤC</h1>
+                            <h1>CẬP NHẬT SLIDER</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Bảng điều khiển</a>
                                 </li>
-                                <li class="breadcrumb-item active">Thêm trang đơn</li>
+                                <li class="breadcrumb-item active">Cập nhật slider</li>
                             </ol>
                         </div>
                     </div>
@@ -34,9 +35,9 @@
                             </div>
                             <div class="col-md-6 text-right">
                                 <button type="submit" class=" btn btn-sm btn-success">
-                                    <i class="fas fa-save"></i> Lưu[Thêm]
+                                    <i class="fas fa-save"></i> Lưu[Cập nhật]
                                 </button>
-                                <a href="{{ route('page.index') }}" class=" btn btn-sm btn-info">
+                                <a href="{{ route('slider.index') }}" class=" btn btn-sm btn-info">
                                     <i class="fas fa-long-arrow-alt-left"></i>Quay về danh sách
                                 </a>
                             </div>
@@ -47,39 +48,21 @@
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="mb-3">
-                                    <label for="title">Tên trang đơn</label>
-                                    <input type="text" name="title" value=" {{ old('title') }}" id="title"
-                                        class="form-control" placeholder="Nhập tên trang đơn">
-                                    @if ($errors->has('title'))
+                                    <label for="name">Tên slider</label>
+                                    <input type="text" name="name" value=" {{ old('name', $slider->name) }}"
+                                        id="name" class="form-control" placeholder="Nhập tên slider">
+                                    @if ($errors->has('name'))
                                         <div class="text-danger">
-                                            {{ $errors->first('title') }}
+                                            {{ $errors->first('name') }}
                                         </div>
                                     @endif
                                 </div>
                                 <div class="mb-3">
-                                    <label for="metakey">Từ khóa</label>
-                                    <textarea name="metakey" id="metakey" class="form-control" placeholder="Từ khóa tìm kiếm"> {{ old('metakey') }}</textarea>
-                                    @if ($errors->has('metakey'))
+                                    <label for="link">Liên kết</label>
+                                    <textarea name="link" id="link" class="form-control" placeholder="Liên kết"> {{ old('link', $slider->link) }}</textarea>
+                                    @if ($errors->has('link'))
                                         <div class="text-danger">
-                                            {{ $errors->first('metakey') }}
-                                        </div>
-                                    @endif
-                                </div>
-                                <div class="mb-3">
-                                    <label for="metadesc">Mô tả</label>
-                                    <textarea name="metadesc" id="metadesc" class="form-control" placeholder="Nhập mô tả"> {{ old('metadesc') }}</textarea>
-                                    @if ($errors->has('metadesc'))
-                                        <div class="text-danger">
-                                            {{ $errors->first('metadesc') }}
-                                        </div>
-                                    @endif
-                                </div>
-                                <div class="mb-3">
-                                    <label for="detail">Nội dung</label></label>
-                                    <textarea name="detail" id="detail" class="form-control" placeholder="Nhập mô tả"> {{ old('detail') }}</textarea>
-                                     @if ($errors->has('detail'))
-                                        <div class="text-danger">
-                                            {{ $errors->first('detail') }}
+                                            {{ $errors->first('link') }}
                                         </div>
                                     @endif
                                 </div>
@@ -87,20 +70,29 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="mb-3">
-                                    <label for="image">Hình đại diện</label>
-                                    <input type="file" name="image" value=" {{ old('image') }}" id="image"
-                                        class="form-control-file" placeholder="Nhập tên trang đơn">
-                                        @if ($errors->has('image'))
-                                        <div class="text-danger">
-                                            {{ $errors->first('image') }}
-                                        </div>
-                                    @endif
+                                    <label for="sort_order">Thứ tự</label>
+                                    <select class="form-control" id="sort_order" name="sort_order">
+                                        <option value="0">--Vị trí sắp xếp--</option>
+                                        {!! $html_sort_order !!}
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="position">Vị trí</label>
+                                    <select class="form-control" id="position" name="position">
+                                        <option value="slideshow">--slideshow--</option>
+                                        <option value="slideshow">--slideshow--</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="image">Hình ảnh</label>
+                                    <input type="file" name="image" id="image" class="form-control-file">
                                 </div>
                                 <div class="mb-3">
                                     <label for="status">Trạng thái</label>
                                     <select class="form-control" id="status" name="status">
                                         <option value="1">--Xuất bản --</option>
                                         <option value="2">--Chưa xuất bản--</option>
+                                        {!! $html_sort_order !!}
                                     </select>
                                 </div>
                             </div>

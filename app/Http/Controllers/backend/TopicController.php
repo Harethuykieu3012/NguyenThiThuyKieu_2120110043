@@ -31,12 +31,12 @@ class TopicController extends Controller
      */
     public function create()
     {
-        $list_topic = Topic::where('status', '!=', 0)->orderBy('created_at', 'desc')->get();
+        $list_topic = Topic::where('status', '!=', 0)->get();
         $html_parent_id = '';
         $html_sort_order = '';
         foreach ($list_topic as $item) {
-            $html_parent_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
-            $html_sort_order .= '<option value="' . $item->sort_order . '">Sau:' . $item->name . '</option>';
+            $html_parent_id .= '<option value="' . $item->id . '">' . $item->title . '</option>';
+            $html_sort_order .= '<option value="' . $item->sort_order . '">Sau:' . $item->title . '</option>';
         }
         return view('backend.topic.create', compact('html_parent_id', 'html_sort_order'));
     }
@@ -103,11 +103,11 @@ class TopicController extends Controller
         $html_sort_order = '';
         foreach ($list_topic as $item) {
             if ($topic->parent_id == $item->id) {
-                $html_parent_id .= '<option selected value="' . $item->id . '">' . $item->name . '</option>';
+                $html_parent_id .= '<option selected value="' . $item->id . '">' . $item->title . '</option>';
             } else {
-                $html_parent_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
+                $html_parent_id .= '<option value="' . $item->id . '">' . $item->title . '</option>';
             }
-            $html_sort_order .= '<option value="' . $item->sort_order . '">Sau: ' . $item->name . '</option>';
+            $html_sort_order .= '<option value="' . $item->sort_order . '">Sau: ' . $item->title . '</option>';
         }
         return view('backend.topic.edit', compact('topic', 'html_parent_id', 'html_sort_order'));
     }
@@ -119,8 +119,8 @@ class TopicController extends Controller
     {
         $topic = Topic::find($id);
         // $topic = new Topic;
-        $topic->name = $request->name;
-        $topic->slug = Str::slug($topic->name = $request->name, '-');
+        $topic->title = $request->title;
+        $topic->slug = Str::slug($topic->title = $request->title, '-');
         $topic->metakey = $request->metakey;
         $topic->metadesc = $request->metadesc;
         $topic->parent_id = $request->parent_id;

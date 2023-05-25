@@ -16,7 +16,10 @@ class PageStoreRequest extends FormRequest
         return [
             'title' => 'required|min:2',
             'metakey' => 'required',
-            'metadesc' => 'required'
+            'metadesc' => 'required',
+            'detail' => 'required',
+            'image' => 'required',
+
         ];
     }
     public function messages()
@@ -25,7 +28,10 @@ class PageStoreRequest extends FormRequest
             'title.required' => 'Bạn chưa nhập tên',
             'title.min' => 'Tên ít nhất 2 kí tự',
             'metakey.required' => 'Bạn chưa nhập từ khóa tìm kiếm',
-            'metadesc' => 'Bạn chưa nhập mô tả'
+            'metadesc' => 'Bạn chưa nhập mô tả',
+            'detail' => 'Bạn chưa nhập nội dung',
+            'image.required' => 'Vui lòng chọn hình ảnh'
+
         ];
     }
 }

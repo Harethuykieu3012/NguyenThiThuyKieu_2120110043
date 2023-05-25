@@ -58,16 +58,6 @@
                                     @endif
                                 </div>
                                 <div class="mb-3">
-                                    <label for="topic_id">Tên chủ đề</label>
-                                    <input type="text" name="topic_id" value=" {{ old('topic_id', $post->topic_id) }}"
-                                        id="topic_id" class="form-control" placeholder="Nhập tên chủ đề">
-                                    @if ($errors->has('topic_id'))
-                                        <div class="text-danger">
-                                            {{ $errors->first('topic_id') }}
-                                        </div>
-                                    @endif
-                                </div>
-                                <div class="mb-3">
                                     <label for="metakey">Từ khóa</label>
                                     <textarea name="metakey" id="metakey" class="form-control" placeholder="Từ khóa tìm kiếm"> {{ old('metakey', $post->metakey) }}</textarea>
                                     @if ($errors->has('metakey'))
@@ -82,6 +72,15 @@
                                     @if ($errors->has('metadesc'))
                                         <div class="text-danger">
                                             {{ $errors->first('metadesc') }}
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="mb-3">
+                                    <label for="detail">Nội dung</label>
+                                    <textarea name="detail" id="detail" class="form-control" placeholder="Nhập nội dung"> {{ old('detail', $post->detail) }}</textarea>
+                                    @if ($errors->has('detail'))
+                                        <div class="text-danger">
+                                            {{ $errors->first('detail') }}
                                         </div>
                                     @endif
                                 </div>

@@ -81,11 +81,11 @@
                                     <label for="detail">Nội dung</label>
                                     <textarea name="detail" id="detail" class="form-control" 
                                     placeholder="Nhập nội dung"> {{ old('detail',$page->detail) }}</textarea>
-                                    {{-- @if ($errors->has('detail'))
+                                    @if ($errors->has('detail'))
                                         <div class="text-danger">
                                             {{ $errors->first('detail') }}
                                         </div>
-                                    @endif --}}
+                                    @endif
                                 </div>
 
                             </div>
@@ -93,7 +93,7 @@
                                 <div class="mb-3">
                                     <label for="image">Hình đại diện</label>
                                     <input type="file" name="image" value=" {{ old('image') }}" id="image"
-                                        class="form-control">
+                                        class="form-control-file">
                                 </div>
                                 <div class="mb-3">
                                     <label for="status">Trạng thái</label>

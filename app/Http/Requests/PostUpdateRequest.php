@@ -16,7 +16,9 @@ class PostUpdateRequest extends FormRequest
         return [
             'title' => 'required|min:2',
             'metakey' => 'required',
-            'metadesc' => 'required'
+            'metadesc' => 'required',
+            'detail' => 'required',
+
         ];
     }
     public function messages()
@@ -25,7 +27,9 @@ class PostUpdateRequest extends FormRequest
             'title.required' => 'Bạn chưa nhập tên',
             'title.min' => 'Tên ít nhất 2 kí tự',
             'metakey.required' => 'Bạn chưa nhập từ khóa tìm kiếm',
-            'metadesc' => 'Bạn chưa nhập mô tae'
+            'metadesc' => 'Bạn chưa nhập mô tả',
+            'detail' => 'Bạn chưa nhập nội dung',
+
         ];
     }
 }

@@ -94,7 +94,12 @@
                                 <div class="mb-3">
                                     <label for="image">Hình đại diện</label>
                                     <input type="file" name="image" value=" {{ old('image') }}" id="image"
-                                        class="form-control" placeholder="Nhập tên danh mục">
+                                        class="form-control-file" placeholder="Nhập tên danh mục">
+                                        @if ($errors->has('image'))
+                                        <div class="text-danger">
+                                            {{ $errors->first('image') }}
+                                        </div>
+                                    @endif
                                 </div>
                                 <div class="mb-3">
                                     <label for="status">Trạng thái</label>

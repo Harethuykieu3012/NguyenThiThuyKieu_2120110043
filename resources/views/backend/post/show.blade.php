@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Chi tiết mục sản phẩm')
+@section('title', 'Chi tiết bài viết')
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -13,7 +13,7 @@
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Bảng điều khiển</a>
                             </li>
-                            <li class="breadcrumb-item active">Chi tiết danh mục</li>
+                            <li class="breadcrumb-item active">Chi tiết bài viết</li>
                         </ol>
                     </div>
                 </div>
@@ -52,10 +52,6 @@
                         <tr>
                             <td>Id</td>
                             <td> {{ $post->id }} </td>
-                        </tr>
-                        <tr>
-                            <td>Topic_id</td>
-                            <td> {{ $post->topic_id }} </td>
                         </tr>
                         <tr>
                             <td>Title</td>

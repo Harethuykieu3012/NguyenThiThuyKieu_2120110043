@@ -8,8 +8,8 @@ use App\Models\Post;
 use App\Models\Topic;
 
 use Illuminate\Support\Str;
-use App\Http\Requests\PageStoreRequest;
-use App\Http\Requests\PageUpdateRequest;
+use App\Http\Requests\PostStoreRequest;
+use App\Http\Requests\PostUpdateRequest;
 use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
@@ -36,7 +36,7 @@ class PostController extends Controller
         $html_topic_id = '';
 
         foreach ($list_topic as $item) {
-            $html_topic_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
+            $html_topic_id .= '<option value="' . $item->id . '">' . $item->title . '</option>';
         }
         return view('backend.post.create', compact('html_topic_id'));
     }
@@ -44,7 +44,7 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(PageStoreRequest $request)
+    public function store(PostStoreRequest $request)
     {
         $post = new Post;
         $post->title = $request->title;
@@ -102,18 +102,18 @@ class PostController extends Controller
 
         foreach ($list_topic as $item) {
             if ($post->topic_id == $item->id) {
-                $html_topic_id .= '<option selected value="' . $item->id . '">' . $item->name . '</option>';
+                $html_topic_id .= '<option selected value="' . $item->id . '">' . $item->title . '</option>';
             } else {
-                $html_topic_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
+                $html_topic_id .= '<option value="' . $item->id . '">' . $item->title . '</option>';
             }
         }
-        return view('backend.post.edit', compact('post', 'html_topic_id '));
+        return view('backend.post.edit', compact('post', 'html_topic_id'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(PageUpdateRequest $request, string $id)
+    public function update(PostUpdateRequest $request, string $id)
     {
         $post = Post::find($id);
         // $post = new Page;

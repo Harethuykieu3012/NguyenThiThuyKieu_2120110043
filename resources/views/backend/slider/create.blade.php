@@ -1,7 +1,7 @@
 @extends('layouts.admin')
-@section('title', 'Thêm trang đơn')
+@section('title', 'Thêm Slider')
 @section('content')
-    <form action="{{ route('page.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('slider.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -15,7 +15,7 @@
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Bảng điều khiển</a>
                                 </li>
-                                <li class="breadcrumb-item active">Thêm trang đơn</li>
+                                <li class="breadcrumb-item active">Thêm Slider</li>
                             </ol>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                                 <button type="submit" class=" btn btn-sm btn-success">
                                     <i class="fas fa-save"></i> Lưu[Thêm]
                                 </button>
-                                <a href="{{ route('page.index') }}" class=" btn btn-sm btn-info">
+                                <a href="{{ route('slider.index') }}" class=" btn btn-sm btn-info">
                                     <i class="fas fa-long-arrow-alt-left"></i>Quay về danh sách
                                 </a>
                             </div>
@@ -47,39 +47,22 @@
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="mb-3">
-                                    <label for="title">Tên trang đơn</label>
-                                    <input type="text" name="title" value=" {{ old('title') }}" id="title"
-                                        class="form-control" placeholder="Nhập tên trang đơn">
-                                    @if ($errors->has('title'))
+                                    <label for="name">Tên slider</label>
+                                    <input type="text" name="name" value=" {{ old('name') }}" id="name"
+                                        class="form-control" placeholder="Nhập tên slider">
+                                    @if ($errors->has('name'))
                                         <div class="text-danger">
-                                            {{ $errors->first('title') }}
+                                            {{ $errors->first('name') }}
                                         </div>
                                     @endif
                                 </div>
+
                                 <div class="mb-3">
-                                    <label for="metakey">Từ khóa</label>
-                                    <textarea name="metakey" id="metakey" class="form-control" placeholder="Từ khóa tìm kiếm"> {{ old('metakey') }}</textarea>
-                                    @if ($errors->has('metakey'))
+                                    <label for="link">Link</label>
+                                    <textarea name="link" id="link" class="form-control" placeholder="Nhập link slider"> {{ old('link') }}</textarea>
+                                    @if ($errors->has('link'))
                                         <div class="text-danger">
-                                            {{ $errors->first('metakey') }}
-                                        </div>
-                                    @endif
-                                </div>
-                                <div class="mb-3">
-                                    <label for="metadesc">Mô tả</label>
-                                    <textarea name="metadesc" id="metadesc" class="form-control" placeholder="Nhập mô tả"> {{ old('metadesc') }}</textarea>
-                                    @if ($errors->has('metadesc'))
-                                        <div class="text-danger">
-                                            {{ $errors->first('metadesc') }}
-                                        </div>
-                                    @endif
-                                </div>
-                                <div class="mb-3">
-                                    <label for="detail">Nội dung</label></label>
-                                    <textarea name="detail" id="detail" class="form-control" placeholder="Nhập mô tả"> {{ old('detail') }}</textarea>
-                                     @if ($errors->has('detail'))
-                                        <div class="text-danger">
-                                            {{ $errors->first('detail') }}
+                                            {{ $errors->first('link') }}
                                         </div>
                                     @endif
                                 </div>
@@ -87,14 +70,28 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="mb-3">
-                                    <label for="image">Hình đại diện</label>
+                                    <label for="sort_order">Vị trí sắp xếp</label>
+                                    <select class="form-control" id="sort_order" name="sort_order">
+                                        <option value="0">--Vị trí sắp xếp--</option>
+                                        {!! $html_sort_order !!}
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="image">Hình ảnh</label>
                                     <input type="file" name="image" value=" {{ old('image') }}" id="image"
-                                        class="form-control-file" placeholder="Nhập tên trang đơn">
+                                        class="form-control-file" placeholder="Nhập tên slider">
                                         @if ($errors->has('image'))
                                         <div class="text-danger">
                                             {{ $errors->first('image') }}
                                         </div>
                                     @endif
+                                </div>
+                                <div class="mb-3">
+                                    <label for="position">Vị trí</label>
+                                    <select class="form-control" id="position" name="position">
+                                        <option value="slideshow">--slideshow--</option>
+                                        <option value="slideshow">--slideshow--</option>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="status">Trạng thái</label>

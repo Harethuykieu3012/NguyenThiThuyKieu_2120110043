@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Tất cả trang đơn sản phẩm')
+@section('title', 'Thùng rác trang đơn')
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -12,7 +12,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item active">Tất cả trang đơn</li>
+                            <li class="breadcrumb-item active">Thùng rác trang đơn</li>
                         </ol>
                     </div>
                 </div>

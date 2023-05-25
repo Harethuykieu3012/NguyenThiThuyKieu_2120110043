@@ -26,17 +26,11 @@ class PageController extends Controller
         return view('backend.page.trash', compact('list_page'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('backend.page.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(PageStoreRequest $request)
     {
         $page = new Post;
@@ -131,7 +125,7 @@ class PageController extends Controller
         //end upload
         if ($page->save()) {
             $link = Link::where([['type', '=', 'page'], ['table_id', '=', $id]])->first();
-            //  $link->slug = $page->slug;
+            $link->slug = $page->slug;
             $link->save();
             return redirect()->route('page.index')->with('message', ['type' => 'success', 'msg' => 'Sửa mẫu tin thành công !']);
         } else

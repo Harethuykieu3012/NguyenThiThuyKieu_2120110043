@@ -4,9 +4,11 @@ namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
+use App\Models\Slider;
+
 use Illuminate\View\Component;
 
-class Slider extends Component
+class Slideshow extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +23,8 @@ class Slider extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.slider');
+        $list_slider = Slider::where([['status', '=', 1], ['position', 'slideshow', 'slideshow']])
+        ->orderBy('sort_order', 'ASC')->get();
+        return view('components.slideshow', compact('list_slider'));
     }
 }
