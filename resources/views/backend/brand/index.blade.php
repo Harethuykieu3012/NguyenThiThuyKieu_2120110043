@@ -42,7 +42,8 @@
                 </div>
                 <div class="card-body">
                     @includeIf('backend.message_alert')
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-striped" id="myTable">
+
                         <thead>
                             <tr>
                                 <th style="width:20px;" class="text-center">#</th>

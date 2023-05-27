@@ -9,4 +9,18 @@ class Product extends Model
 {
     use HasFactory;
     protected $table = 'nttk_product';
+    public function productimg()
+    {
+        return $this->hasMany(ProductImage::class,'product_id','id');
+    }
+    public function productstore()
+    {
+        return $this->hasOne(ProductStore::class, 'product_id', 'id');
+    }
+    public function productsale()
+    {
+        return $this->hasOne(ProductSale::class, 'product_id', 'id');
+    }
+
+
 }
