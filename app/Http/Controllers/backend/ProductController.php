@@ -190,9 +190,6 @@ class ProductController extends Controller
         }
         //end upload file
         if ($product->save()) {
-            $link = Link::where([['type', '=', 'product'], ['table_id', '=', $id]])->first();
-            $link->slug = $product->slug;
-            $link->save();
             return redirect()->route('product.index')->with('message', ['type' => 'success', 'msg' => 'Sửa mẫu tin thành công !']);
         } else
             return redirect()->route('product.index')->with('message', ['type' => 'danger', 'msg' => 'Sửa mẫu tin không thành công !']);
@@ -205,19 +202,23 @@ class ProductController extends Controller
         $product = Product::find($id);
         //thong tin hinh xoa
         $path_dir = "images/product/";
-        $path_image_delete = $path_dir . $product->image;
         if ($product == null) {
             return redirect()->route('product.trash')->with('message', ['type' => 'danger', 'msg' => 'Mẫu tin không tồn tại!']);
         }
         if ($product->delete()) {
             //xoa hinh
-            if (File::exists($path_image_delete)) {
-                File::delete($path_image_delete);
+            foreach ($product->productimg as $pro_img) {
+                if (File::exists(($path_dir . $pro_img->image))) {
+                    File::delete(($path_dir . $pro_img->image));
+                }
+            }
+            foreach ($product->productimg as $pro_img) {
+                if ($product_image = ProductImage::where('product_id', '=', $id)->first()) {
+                    $product_image->delete();
+                }
             }
         }
-        $link = Link::where([['type', '=', 'product'], ['table_id', '=', $id]])->first();
-        $link->delete();
-        return redirect()->route('product.index')->with('message', ['type' => 'success', 'msg' => 'Xóa mẫu tin thành công !']);
+        return redirect()->route('product.trash')->with('message', ['type' => 'success', 'msg' => 'Xóa mẫu tin thành công !']);
     }
     //get:adim/product/status/1
     public function status($id)

@@ -9,5 +9,10 @@ class Category extends Model
 {
     use HasFactory;
     protected $table='nttk_category';
+    public function CategorySub()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
     
 }

@@ -9,8 +9,12 @@
 @endsection
 @section('content')
 <x-slideshow />
+
+
+
 @foreach ($list_category as $category)
 	<x-product-home :rowcat="$category"/>
 @endforeach
+<div class="container"></div>
 
 @endsection

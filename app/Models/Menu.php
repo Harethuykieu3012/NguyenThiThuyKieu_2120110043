@@ -9,5 +9,8 @@ class Menu extends Model
 {
     use HasFactory;
     protected $table='nttk_menu';
-    
+    public function MenuSub()
+    {
+        return $this->hasMany(Menu::class, 'parent_id');
+    }
 }
